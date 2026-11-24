@@ -1,0 +1,8 @@
+{
+  "appId": "app.multicart.piano",
+  "appName": "Multicart",
+  "webDir": "www",
+  "backgroundColor": "#0d111a",
+  "android": { "allowMixedContent": false },
+  "ios": { "contentInset": "always" }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "multicart",
+  "version": "1.0.0",
+  "description": "Piano MIDI visualizer with a falling-note roll and 88-key keyboard.",
+  "main": "electron/main.js",
+  "author": "Multicart contributors",
+  "license": "MIT",
+  "homepage": "https://github.com/YOUR-USER/multicart",
+  "scripts": {
+    "start": "electron .",
+    "serve": "node -e \"require('http').createServer((q,r)=>{const f=require('path').join(__dirname,q.url==='/'?'index.html':q.url.split('?')[0]);require('fs').readFile(f,(e,d)=>{if(e){r.writeHead(404);r.end('404')}else{r.end(d)}})}).listen(8080,()=>console.log('http://localhost:8080'))\"",
+    "dist:win": "electron-builder --win --publish never",
+    "dist:mac": "electron-builder --mac --publish never",
+    "dist:linux": "electron-builder --linux --publish never",
+    "www": "node scripts/prepare-www.js"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
+    "@capacitor/cli": "^6.2.0",
+    "@capacitor/core": "^6.2.0",
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/ios": "^6.2.0"
+  },
+  "build": {
+    "appId": "app.multicart.piano",
+    "productName": "Multicart",
+    "directories": { "output": "dist", "buildResources": "build" },
+    "files": ["index.html", "icons/**", "electron/**", "package.json"],
+    "win": { "icon": "build/icon.ico", "target": ["nsis", "portable"] },
+    "nsis": { "artifactName": "Multicart-Setup.${ext}", "oneClick": false, "allowToChangeInstallationDirectory": true },
+    "portable": { "artifactName": "Multicart-Portable.${ext}" },
+    "mac": { "icon": "build/icon.png", "category": "public.app-category.music", "identity": null, "target": [{ "target": "dmg", "arch": ["universal"] }] },
+    "dmg": { "artifactName": "Multicart.${ext}" },
+    "linux": { "icon": "build/icon.png", "category": "AudioVideo;Audio;Music", "target": ["AppImage", "deb"], "maintainer": "Multicart contributors" },
+    "appImage": { "artifactName": "Multicart.${ext}" },
+    "deb": { "artifactName": "Multicart.${ext}" }
+  }
+}
